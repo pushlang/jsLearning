@@ -1,0 +1,6 @@
+*.json
+.idea
+.vscode
+node_modules
+#*.code-workspace
+/react

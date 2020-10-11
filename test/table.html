@@ -1,0 +1,40 @@
+<body>
+    <table id="table">
+        <colgroup>
+            <col width=500>
+            <col width=500>
+            <col width=500>
+        <tr height=35>
+            <td>один лось</td>
+            <td>два лося</td>
+            <td></td>
+        </tr>
+        <tr height=35>
+            <td>три лося</td>
+            <td>четыре лося</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <script>
+        document.body.onload = onLoad
+
+        function onLoad() {
+            console.log('Body loaded!');
+            table.border = 1
+        }
+
+        function hasOP(obj, prop) {
+            let wasFound = []
+            for (const k in obj)
+                if (new String(k).includes(prop) === true)
+                    wasFound.push(k + '=' + obj[k])
+
+            if (wasFound.length === 0) console.log('Wasn\'t found!');
+            return wasFound
+        }
+
+
+
+    </script>
+</body>

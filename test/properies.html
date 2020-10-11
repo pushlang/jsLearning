@@ -1,0 +1,52 @@
+<body>
+    <script>
+        document.body.myData = {
+            name: 'Caesar',
+            title: 'Imperator'
+        }
+
+        class Man {
+            constructor(opts) {
+                this.fName = opts.fName
+                this.lName = opts.lName
+                this.address = opts.address
+                this.age = opts.age
+            }
+        }
+
+        class Coder extends Man {
+            constructor(opts) {
+                super(opts)
+                this.job = opts.job
+                this.salary = opts.salary
+            }
+        }
+
+        const somebody = new Coder({
+            fName: 'Vasily',
+            lName: 'Tomilin',
+            age: 45,
+            address: { city: 'Saint-Petersburg', street: 'Kamennostrovsky pr.' },
+            job: 'Engineer CISCO',
+            salary: 300000
+        })
+
+        somebody.address.index = 190000
+        somebody.sayAddress = function () {
+            console.log(this.address)
+        }
+
+        somebody.sayAddress()
+
+        console.log(somebody.address)
+
+        console.log(document.body.myData.title)
+
+        document.body.sayTagName = function () {
+            console.log(this.tagName)
+            console.log(this)
+        }
+
+        document.body.sayTagName()
+    </script>
+</body>

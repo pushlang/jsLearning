@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Лоси это круто!</title>
+</head>
+
+<body>
+    Правда о лосях.
+    <ol class="test">
+        <li>Лось - животное хитрое</li>
+        <li>Лось - животное умное</li>
+        <li>Лось - животное храброе</li>
+        <!-- comment -->
+        <li>...и коварное!</li>
+    </ol>
+    <!-- comment -->
+    <table id="table1">
+        <tr>
+            <td>один лось</td>
+            <td>два лося</td>
+        </tr>
+        <tr>
+            <td>три лося</td>
+            <td>четыре лося</td>
+        </tr>
+    </table>
+
+    <div id="elem">
+        <div id="elem-content">Element</div>
+    </div>
+
+    <ul>
+        <li>Этот</li>
+        <li>тест</li>
+    </ul>
+    <ul>
+        <li>полностью</li>
+        <li>пройден</li>
+    </ul>
+
+    <div class="contents">
+        <ul class="book">
+            <li class="chapter">Глава 1</li>
+            <li class="chapter">Глава 2</li>
+        </ul>
+    </div>
+
+
+    <table id="table2">
+        <tr>
+            <td>Ваш возраст:</td>
+
+            <td>
+                <label>
+                    <input type="radio" name="age" value="young" checked> младше 18
+                </label>
+                <label>
+                    <input type="radio" name="age" value="mature"> от 18 до 50
+                </label>
+                <label>
+                    <input type="radio" name="age" value="senior"> старше 60
+                </label>
+            </td>
+        </tr>
+    </table>
+
+    <a href="http://ya.ru/zip">Archive ZIP#1</a>
+    <a href="http://ya.ru/rar">Archive RAR</a>
+    <a href="http://ya.ru/gz">Archive GZ</a>
+    <a href="http://ya.ru/zip">Archive ZIP#2</a>
+
+    <script>
+        document.body.onload = onLoad
+        function onLoad() {
+            printTag('elems')
+        }
+
+        function printTag(arg = 'nodes') {
+            let elem = [...document.body.childNodes]
+
+            if (arg === 'elems') {
+                elem = [...document.body.children]
+            }
+
+            const n = []
+            n[1] = { type: 'ELEMENT_NODE', name: 'tagName', data: 'innerHTML' }
+            n[3] = { type: 'TEXT_NODE', name: 'nodeName', data: 'data' }
+            n[8] = { type: 'COMMENT_NODE', name: 'nodeName', data: 'data' }
+
+            elem.forEach(e => {
+                const cn = n[e.nodeType]
+                console.log(`type: ${cn.type}:, name: ${e[cn.name]}, value: ${e[cn.data]}`);
+            })
+        }
+
+        console.log(document instanceof HTMLBodyElement); // false
+        console.log(document instanceof HTMLElement); // false
+        console.log(document instanceof Element); // false
+        console.log(document instanceof HTMLDocument); // true
+        console.log(document instanceof Node); // true
+        console.log(document instanceof EventTarget); // true
+        console.log(document instanceof Object); // true
+
+        console.log(document.body instanceof HTMLBodyElement); // true
+        console.log(document.body instanceof HTMLElement); // true
+        console.log(document.body instanceof Element); // true
+        console.log(document.body instanceof HTMLDocument); // false
+        console.log(document.body instanceof Node); // true
+        console.log(document.body instanceof EventTarget); // true
+        console.log(document.body instanceof Object); // true
+    </script>
+</body>
+
+</html>

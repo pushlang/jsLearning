@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>||Работа с элементами||</title>
+</head>
+
+<body>
+  <div>
+    <h3>Привет!</h3>
+  </div>
+  <table id="table">
+    <tbody>
+      <tr class="ctrl">
+        <td>Enter your Firstname:</td>
+        <td><input type="text" id="fName" /></td>
+      </tr>
+      <tr class="ctrl">
+        <td>Enter your Lastname:</td>
+        <td><input type="text" id="lName" /></td>
+      </tr>
+      <tr class="ctrl">
+        <td><input type="button" id='btnPush' value="Push row" /></td>
+        <td><input type="button" id='btnPop' value="Pop row" /></td>
+        <!-- <td><input type="button" id='btnRem' value="Remove row" /></td> -->
+        <!-- <td><input type="text" id="idToRem" /></td> -->
+      </tr>
+      <tr class="ctrl">
+        <td colspan="2">Строки вставляем тут:</td>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr>
+        <td>
+          <div id='org_div1'></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    function cl(...args) {
+      console.log(...args)
+    }
+    function cd(...args) {
+      console.dir(...args)
+    }
+
+    // const btnAdd = document.querySelector('#btnAdd')
+    const inpName = document.querySelector('#fName')
+    const inpPassword = document.querySelector('#lName')
+
+    const pushElement = pushElement1
+    const popElement = popElement1
+
+    document.body.onload = onLoad
+    btnPush.onclick = pushElement
+    btnPop.onclick = popElement
+
+    function onLoad() {
+      const dataRows = table.tBodies[1].querySelectorAll("tr")
+      if (!checkDeleteLastRaw(dataRows)) return
+    }
+    
+    function pushElement1() {
+      if (!checkInsertRaws()) {
+        cl('Fill Firstname and Lastname fields!')
+        return null
+      }
+      const dataRows = table.tBodies[1].querySelectorAll("tr.data")
+      const newChild = createNewChild(getInsNumber(dataRows))
+      const divNode = document.getElementById("org_div1");
+      table.tBodies[1].insertBefore(newChild, divNode.closest('tr'));
+    }
+    
+    function pushElement2() {
+      if (!checkInsertRaws()) {
+        cl('Fill Firstname and Lastname fields!')
+        return null
+      }
+      const dataRows = table.tBodies[1].querySelectorAll("tr.data")
+      const newRaw = table.tBodies[1].insertRaw(getInsNumber(dataRows))
+      setAttrNewChild(newRaw, "class", "data", n)
+    }
+
+    function createNewChild(n) {
+      let newChild = document.createElement("tr");
+      setAttrNewChild(newChild, "class", "data", n)
+      return newChild
+    }
+
+    function setAttrNewChild(nc, atr, atrVal, n) {
+      nc.setAttribute(atr, atrVal);
+      nc.innerHTML =
+      ` 
+        <td id="colNumbr">${n}</td>  
+        <td id="colFName">${inpName.value}</td>
+        <td id="colLName">${inpPassword.value}</td>
+      `
+    }
+
+    const getInsNumber = dataRows => dataRows.length + 1
+
+    function checkInsertRaws() {
+      if (!inpName.value || !inpPassword.value) return false
+      // btnPop.style.display = 'block'
+      // btnPop.style.visibility = 'visible'
+      btnPop.hidden = false
+      return true
+    }
+
+    function popElement1() {
+      const dataRows = table.tBodies[1].querySelectorAll("tr.data")
+      checkDeleteLastRaw(dataRows)
+      const lastDataRow = dataRows[getIndex(dataRows)]
+      table.tBodies[1].removeChild(lastDataRow)
+    }
+    
+    function popElement2() {
+      const dataRows = table.tBodies[1].querySelectorAll("tr.data")
+      checkDeleteLastRaw(dataRows)
+      table.tBodies[1].deleteRow(getIndex(dataRows))
+    }
+    
+    function checkDeleteLastRaw(dr) {
+      if (dr.length < 2) {
+        cl('Rows for deleting are absent!')
+        // btnPop.style.display = 'none'
+        // btnPop.style.visibility = 'hidden'
+        btnPop.hidden = true
+        return false
+      }
+      return true
+    }
+
+    const getIndex = dataRows => dataRows.length - 1
+  </script>
+</body>
+
+</html>
